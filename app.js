@@ -27,18 +27,23 @@ liveReloadServer.server.once("connection", () => {
 
 //! Start main Page
 app.get("/", (req, res) => {
-  UserData.find()
-    // result => Array Of Object From DB
-    .then((result) => {
-      res.render("home.ejs", { myTitle: "home bage", arr: result });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  res.render("index");
+});
+
+app.get("/user/add.html", (req, res) => {
+  res.render("user/add");
+});
+
+app.get("/user/view.html", (req, res) => {
+  res.render("user/view");
+});
+
+app.get("/user/edit.html", (req, res) => {
+  res.render("user/edit");
 });
 //! End main Page
 
-//$ Start Linked To DB
+//$ Start Conection From DB
 mongoose
   .connect(
     "mongodb+srv://DB_user-1:EhpV6UmRZeec3hTP@db-1.ziizxy3.mongodb.net/all-data?retryWrites=true&w=majority&appName=DB-1"
@@ -51,18 +56,4 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
-//$ End Linked To DB
-
-//@ Start Send Data To DataBase
-app.post("/", (req, res) => {
-  const userData = new UserData(req.body);
-  userData
-    .save()
-    .then(() => {
-      res.send(`<h1>تم ارسال الداتا بنجاح</h1>`);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
-//@ End Send Data To DataBase
+//$ End Conection From DB
