@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= myTitle %></title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <form action="/" method="post">
+      <h1>What is UserName?</h1>
+      <input name="userName" type="text" />
+      <br />
+      <br />
+
+      <h1>What is User Age?</h1>
+      <input name="age" type="number" />
+      <br />
+      <br />
+      <button>send to DataBase</button>
+    </form>
+    <!-- 
+    <% arr.forEach(ele => { %>
+    <h1>Your Name Is <%= ele.userName %></h1>
+    <h3>Your Age Is <%= ele.age %></h3>
+    <hr />
+    <% }) %> -->
+
+    <!--@ في حاله عايز اعرض اخر عنثر فقط ونا مش عارف عددهم كام بستمعل ال at(-1) -->
+    <h1>Your Name Is <%= arr.at(-1).userName %></h1>
+  </body>
+</html>

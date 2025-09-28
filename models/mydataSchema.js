@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
-const schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
-//@ define the Schema (the structure of the article
-const userDataSchema = new schema({
+//@ define the Schema (the structure of the article)
+const userDataSchema = new Schema({
   userName: String,
   age: Number,
 });
