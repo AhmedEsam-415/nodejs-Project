@@ -9,7 +9,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 
-// Start About Auto Refresh
+// Start Auto Refresh
 const path = require("path");
 const livereload = require("livereload");
 const liveReloadServer = livereload.createServer();
@@ -23,25 +23,25 @@ liveReloadServer.server.once("connection", () => {
     liveReloadServer.refresh("/");
   }, 100);
 });
-// End About Auto Refresh
+// End Auto Refresh
 
-//! Start main Page
+//! Start Pages
 app.get("/", (req, res) => {
-  res.render("index");
+  res.render("index", { currentPage: "index" });
 });
 
 app.get("/user/add.html", (req, res) => {
-  res.render("user/add");
+  res.render("user/add", { currentPage: "add" });
 });
 
 app.get("/user/view.html", (req, res) => {
-  res.render("user/view");
+  res.render("user/view", { currentPage: "view" });
 });
 
 app.get("/user/edit.html", (req, res) => {
-  res.render("user/edit");
+  res.render("user/edit", { currentPage: "edit" });
 });
-//! End main Page
+//! End Pages
 
 //$ Start Conection From DB
 mongoose
