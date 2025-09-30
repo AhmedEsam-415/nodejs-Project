@@ -44,19 +44,25 @@
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
             <li class="breadcrumb-item active" aria-current="page">
-              Ali Hassan
+              <%= arrEdit.firstName %> <%= arrEdit.lastName %>
             </li>
           </ol>
 
           <p class="me-md-5">
-            <span class="fw-medium fs-6">Id :</span> 6487021520bcf1af6319484c
+            <span class="fw-medium fs-6">Id :</span> <%= arrEdit._id %>
           </p>
         </nav>
 
-        <form class="mx-0 row gx-3 gy-4 mt-2">
+        <form
+          action="/edit/<%= arrEdit._id %>?_method=PUT"
+          method="post"
+          class="mx-0 row gx-3 gy-4 mt-2"
+        >
           <div class="col-md-6">
             <label for="inputfirstName4" class="form-label">First Name:</label>
             <input
+              name="firstName"
+              value="<%= arrEdit.firstName%>"
               placeholder="Ali..."
               type="text"
               class="form-control"
@@ -66,6 +72,8 @@
           <div class="col-md-6">
             <label for="inputlastName4" class="form-label">Last Name:</label>
             <input
+              name="lastName"
+              value="<%= arrEdit.lastName%>"
               placeholder="Hassan..."
               type="text"
               class="form-control"
@@ -76,6 +84,8 @@
           <div class="col-md-6">
             <label for="inputemail4" class="form-label">Email:</label>
             <input
+              name="email"
+              value="<%= arrEdit.email %>"
               placeholder="ali@gmail.com"
               type="email"
               class="form-control"
@@ -85,6 +95,8 @@
           <div class="col-md-6">
             <label for="inputtele4" class="form-label">Telephone:</label>
             <input
+              name="telephone"
+              value="<%= arrEdit.telephone %>"
               placeholder="011987899"
               type="number"
               class="form-control"
@@ -96,6 +108,8 @@
             <div class="col-md-6">
               <label for="inputage4" class="form-label">Age:</label>
               <input
+                name="age"
+                value="<%= arrEdit.age %>"
                 placeholder="Your Age: ..."
                 type="number"
                 class="form-control"
@@ -107,8 +121,8 @@
           <div>
             <div class="col-md-6">
               <label for="inputCountry" class="form-label">Country:</label>
-              <select id="inputCountry" class="form-select">
-                <option selected hidden disabled>Choose here ...</option>
+              <select id="inputCountry" class="form-select" name="country">
+                <option selected hidden disabled> <%= arrEdit.country %> </option>
 
                 <option>Morocco</option>
                 <option>Egypt</option>
@@ -119,8 +133,8 @@
           <div>
             <div class="col-md-6">
               <label for="inputGender" class="form-label">Gender:</label>
-              <select id="inputGender" class="form-select">
-                <option selected hidden disabled>Choose here ...</option>
+              <select id="inputGender" class="form-select" name="gender">
+                <option selected hidden disabled><%= arrEdit.gender %></option>
                 <option>Male</option>
                 <option>Female</option>
               </select>
@@ -175,7 +189,12 @@
               >
                 Close
               </button>
-              <button type="button" class="btn btn-danger">Delete</button>
+              <form
+                action="/delete/<%= arrEdit._id %>?_method=delete"
+                method="post"
+              >
+                <button type="submit" class="btn btn-danger">Delete</button>
+              </form>
             </div>
           </div>
         </div>
