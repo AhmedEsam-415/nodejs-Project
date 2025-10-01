@@ -32,8 +32,6 @@
     <main class="d-flex flex-nowrap">
       <%- include('../components/sideBar.ejs') %>
 
-      <div class="b-example-divider b-example-vr"></div>
-
       <section class="w-100">
         <%- include('../components/navbar.ejs') %>
 
@@ -63,7 +61,7 @@
             <input
               name="firstName"
               value="<%= arrEdit.firstName%>"
-              placeholder="Ali..."
+              placeholder="<%= arrEdit.firstName%>"
               type="text"
               class="form-control"
               id="inputfirstName4"
@@ -74,7 +72,7 @@
             <input
               name="lastName"
               value="<%= arrEdit.lastName%>"
-              placeholder="Hassan..."
+              placeholder="<%= arrEdit.lastName%>"
               type="text"
               class="form-control"
               id="inputlastName4"
@@ -86,7 +84,7 @@
             <input
               name="email"
               value="<%= arrEdit.email %>"
-              placeholder="ali@gmail.com"
+              placeholder="<%= arrEdit.email %>"
               type="email"
               class="form-control"
               id="inputemail4"
@@ -97,7 +95,7 @@
             <input
               name="telephone"
               value="<%= arrEdit.telephone %>"
-              placeholder="011987899"
+              placeholder="<%= arrEdit.telephone %>"
               type="number"
               class="form-control"
               id="inputtele4"
@@ -110,7 +108,7 @@
               <input
                 name="age"
                 value="<%= arrEdit.age %>"
-                placeholder="Your Age: ..."
+                placeholder="<%= arrEdit.age %>"
                 type="number"
                 class="form-control"
                 id="inputage4"
@@ -122,10 +120,10 @@
             <div class="col-md-6">
               <label for="inputCountry" class="form-label">Country:</label>
               <select id="inputCountry" class="form-select" name="country">
-                <option selected hidden disabled> <%= arrEdit.country %> </option>
-
-                <option>Morocco</option>
-                <option>Egypt</option>
+                <option selected hidden disabled><%= arrEdit.country %></option>
+                <% Country.forEach(element => { %>
+                <option><%= element %></option>
+                <% }) %>
               </select>
             </div>
           </div>

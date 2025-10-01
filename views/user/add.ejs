@@ -44,7 +44,7 @@
             <label for="inputfirstName4" class="form-label">First Name:</label>
             <input
               name="firstName"
-              placeholder="Ali..."
+              placeholder="First Name..."
               type="text"
               class="form-control"
               id="inputfirstName4"
@@ -54,7 +54,7 @@
             <label for="inputlastName4" class="form-label">Last Name:</label>
             <input
               name="lastName"
-              placeholder="Hassan..."
+              placeholder="Last Name..."
               type="text"
               class="form-control"
               id="inputlastName4"
@@ -65,7 +65,7 @@
             <label for="inputemail4" class="form-label">Email:</label>
             <input
               name="email"
-              placeholder="ali@gmail.com"
+              placeholder="Email...: ali@gmail.com"
               type="email"
               class="form-control"
               id="inputemail4"
@@ -75,7 +75,7 @@
             <label for="inputtele4" class="form-label">Telephone:</label>
             <input
               name="telephone"
-              placeholder="011987899"
+              placeholder="Phone Number"
               type="number"
               class="form-control"
               id="inputtele4"
@@ -87,7 +87,7 @@
               <label for="inputage4" class="form-label">Age:</label>
               <input
                 name="age"
-                placeholder="Your Age: ..."
+                placeholder="Age: ..."
                 type="number"
                 class="form-control"
                 id="inputage4"
@@ -100,8 +100,9 @@
               <label for="inputCountry" class="form-label">Country:</label>
               <select id="inputCountry" class="form-select" name="country">
                 <option selected hidden disabled>Choose here ...</option>
-                <option>Morocco</option>
-                <option>Egypt</option>
+                <% Country.forEach(element => { %>
+                <option><%= element %></option>
+                <% }) %>
               </select>
             </div>
           </div>

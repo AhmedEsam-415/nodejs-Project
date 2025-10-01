@@ -5,6 +5,7 @@ const port = 3000;
 const moment = require("moment");
 
 const CustomerData = require("./models/customerSchema");
+const Country = require("./views/user/country");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
@@ -35,7 +36,7 @@ app.get("/", (req, res) => {
     .then((result) => {
       res.render("index", {
         currentPage: "index",
-        arr: result,
+        arr: result ? result : "Not Found",
         moment: moment,
       });
     })
@@ -45,13 +46,17 @@ app.get("/", (req, res) => {
 });
 
 app.get("/user/add.html", (req, res) => {
-  res.render("user/add", { currentPage: "add" });
+  res.render("user/add", { currentPage: "add", Country: Country });
 });
 
 app.get("/edit/:id", (req, res) => {
   CustomerData.findById(req.params.id)
     .then((result) => {
-      res.render("user/edit", { currentPage: "edit", arrEdit: result });
+      res.render("user/edit", {
+        currentPage: "edit",
+        arrEdit: result,
+        Country: Country,
+      });
     })
     .catch((err) => {
       console.log(err);
@@ -76,9 +81,7 @@ app.get("/view/:id", (req, res) => {
 
 //@ Post Requst
 app.post("/user/add.html", (req, res) => {
-  const customerData = new CustomerData(req.body);
-  customerData
-    .save()
+  CustomerData.create(req.body)
     .then(() => {
       res.redirect("/");
     })
@@ -87,6 +90,18 @@ app.post("/user/add.html", (req, res) => {
     });
 });
 //@ End Post Requst
+
+//$ PUT Requst
+app.put("/edit/:id", (req, res) => {
+  CustomerData.findByIdAndUpdate(req.params.id, req.body)
+    .then(() => {
+      res.redirect("/");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+//$ End Post Requst
 
 //$ Delete Requst
 app.delete("/delete/:id", (req, res) => {
@@ -99,18 +114,6 @@ app.delete("/delete/:id", (req, res) => {
     });
 });
 //$ End Delete Requst
-
-//$ Update Data Requst
-app.put("/edit/:id", (req, res) => {
-  CustomerData.findByIdAndUpdate(req.params.id)
-    .then(() => {
-      res.redirect("/");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
-//$ End Update Data Requst
 
 //* Start Conection From DB
 mongoose
