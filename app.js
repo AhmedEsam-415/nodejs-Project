@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const express = require("express");
+const moment = require("moment");
 const app = express();
 const port = 3000;
-const moment = require("moment");
 
 const CustomerData = require("./models/customerSchema");
 const Country = require("./views/user/country");
