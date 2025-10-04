@@ -3,100 +3,28 @@ const router = express.Router();
 
 //* استدعاء الموديلز
 const CustomerData = require("../models/customerSchema");
-const Country = require("../views/user/country");
+const userController = require("../controllers/userController");
 
 //* الأساسيات(Express + Mongoose + Moment);
-const moment = require("moment");
 
 //! Get Requst
-router.get("/", (req, res) => {
-  CustomerData.find()
-    .then((result) => {
-      res.render("index", {
-        currentPage: "index",
-        arr: result,
-        moment: moment,
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
+router.get("/", userController.indexpage_get);
 
-router.get("/user/add.html", (req, res) => {
-  res.render("user/add", { currentPage: "add", Country: Country });
-});
+router.get("/user/add.html", userController.addPage_get);
 
-router.get("/edit/:id", (req, res) => {
-  CustomerData.findById(req.params.id)
-    .then((result) => {
-      res.render("user/edit", {
-        currentPage: "edit",
-        arrEdit: result,
-        Country: Country,
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
+router.get("/edit/:id", userController.editPage_get);
 
-router.get("/view/:id", (req, res) => {
-  CustomerData.findById(req.params.id)
-    .then((result) => {
-      res.render("user/view", {
-        currentPage: "view",
-        arrView: result,
-        moment: moment,
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
+router.get("/view/:id", userController.viewPage_get);
 
 //@ Post Requst
-router.post("/user/add.html", (req, res) => {
-  CustomerData.create(req.body)
-    .then(() => {
-      res.redirect("/");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
+router.post("/user/add.html", userController.addPage_post);
 
-router.post("/search", (req, res) => {
-  const name = req.body.inpUserName.trim();
-  CustomerData.find({ $or: [{ firstName: name }, { lastName: name }] })
-    .then((result) => {
-      res.render("user/search", { currentPage: "search", searchArr: result });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
+router.post("/search", userController.searchPage_post);
 
 //& PUT Requst
-router.put("/edit/:id", (req, res) => {
-  CustomerData.findByIdAndUpdate(req.params.id, req.body)
-    .then(() => {
-      res.redirect("/");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
+router.put("/edit/:id", userController.editPage_put);
 
 //$ Delete Requst
-router.delete("/delete/:id", (req, res) => {
-  CustomerData.findByIdAndDelete(req.params.id)
-    .then(() => {
-      res.redirect("/");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
+router.delete("/delete/:id", userController.deletePage_delete);
 
 module.exports = router;
