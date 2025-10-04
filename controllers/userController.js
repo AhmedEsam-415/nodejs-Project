@@ -5,7 +5,7 @@ const Country = require("../views/user/country");
 //* الأساسيات(Express + Mongoose + Moment);
 const moment = require("moment");
 
-//! Get Requst Functions
+//! Get Requst Functions (الصفحات)
 const indexpage_get = (req, res) => {
   CustomerData.find()
     .then((result) => {
@@ -52,7 +52,7 @@ const viewPage_get = (req, res) => {
     });
 };
 
-//@ Post Requst Functions
+//@ Post Requst Functions (الصفحات)
 const addPage_post = (req, res) => {
   CustomerData.create(req.body)
     .then(() => {
@@ -74,7 +74,7 @@ const searchPage_post = (req, res) => {
     });
 };
 
-//& PUT Requst Functions
+//& PUT Requst Functions (الصفحات)
 const editPage_put = (req, res) => {
   CustomerData.findByIdAndUpdate(req.params.id, req.body)
     .then(() => {
