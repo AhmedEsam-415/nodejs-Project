@@ -33,13 +33,18 @@
       <%- include('./components/sideBar.ejs') %>
 
       <section class="w-100">
-        <%- include('./components/navbar.ejs') %> 
-        
-        <% if (arr.length === 0) { %>
-          <h1 style="text-align: center; margin-top: 5rem; font-weight: bolder; text-transform: capitalize;">no data available</h1>
-        <% } %> 
-        
-        <% if (arr.length >= 1) { %>
+        <%- include('./components/navbar.ejs') %> <% if (arr.length === 0) { %>
+        <h1
+          style="
+            text-align: center;
+            margin-top: 5rem;
+            font-weight: bolder;
+            text-transform: capitalize;
+          "
+        >
+          no data available
+        </h1>
+        <% } %> <% if (arr.length >= 1) { %>
         <table
           style="width: 99%"
           class="text-center mx-auto table mt-5 table-striped table-bordered"

@@ -1,20 +1,23 @@
+//* الأساسيات(Express + Mongoose + Moment);
 const mongoose = require("mongoose");
 const express = require("express");
-const moment = require("moment");
 const app = express();
 const port = 3000;
 
-const CustomerData = require("./models/customerSchema");
-const Country = require("./views/user/country");
-
+//* Middleware أساسية
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 
+//* method-override (عشان PUT و DELETE)
 const methodOverride = require("method-override");
 app.use(methodOverride("_method"));
 
-// Start Auto Refresh
+//! import All Routes
+const allRoutes = require("./routes/allRoutes");
+app.use(allRoutes);
+
+//* Start Auto Refresh
 const path = require("path");
 const livereload = require("livereload");
 const liveReloadServer = livereload.createServer();
@@ -28,94 +31,8 @@ liveReloadServer.server.once("connection", () => {
     liveReloadServer.refresh("/");
   }, 100);
 });
-// End Auto Refresh
 
-//! Get Requst
-app.get("/", (req, res) => {
-  CustomerData.find()
-    .then((result) => {
-      res.render("index", {
-        currentPage: "index",
-        arr: result ? result : "Not Found",
-        moment: moment,
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
-
-app.get("/user/add.html", (req, res) => {
-  res.render("user/add", { currentPage: "add", Country: Country });
-});
-
-app.get("/edit/:id", (req, res) => {
-  CustomerData.findById(req.params.id)
-    .then((result) => {
-      res.render("user/edit", {
-        currentPage: "edit",
-        arrEdit: result,
-        Country: Country,
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
-
-app.get("/view/:id", (req, res) => {
-  CustomerData.findById(req.params.id)
-    .then((result) => {
-      res.render("user/view", {
-        currentPage: "view",
-        arrView: result,
-        moment: moment,
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
-
-//! End Get Requst
-
-//@ Post Requst
-app.post("/user/add.html", (req, res) => {
-  CustomerData.create(req.body)
-    .then(() => {
-      res.redirect("/");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
-//@ End Post Requst
-
-//$ PUT Requst
-app.put("/edit/:id", (req, res) => {
-  CustomerData.findByIdAndUpdate(req.params.id, req.body)
-    .then(() => {
-      res.redirect("/");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
-//$ End Post Requst
-
-//$ Delete Requst
-app.delete("/delete/:id", (req, res) => {
-  CustomerData.findByIdAndDelete(req.params.id)
-    .then(() => {
-      res.redirect("/");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
-//$ End Delete Requst
-
-//* Start Conection From DB
+//* Conection To DB
 mongoose
   .connect(
     "mongodb+srv://DB_user-1:EhpV6UmRZeec3hTP@db-1.ziizxy3.mongodb.net/all-data?retryWrites=true&w=majority&appName=DB-1"
@@ -128,4 +45,3 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
-//* End Conection From DB
